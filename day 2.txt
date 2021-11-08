@@ -1,0 +1,107 @@
+Components of Ansible control Server(ACS)
+
+-> Ansible + 10+tools
+	modules
+		- unit of code which would execute in ARS
+			eg. copy delete file package service
+				require parameters
+					-required parameters
+					-optional parameters
+				1000s of core module is in-built
+modules link:https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html
+
+	plugins
+		-code which empowers various functionality of ansible
+        link:
+https://docs.ansible.com/ansible/latest/plugins/plugins.html
+	ansible
+
+	ansible-playbook
+	ansible-vault
+	ansible-doc
+	
+-> Ansible Configuration file
+	Default path - /etc/ansible/ansible.cfg
+
+->Ansible Playbook(Role)
+	-YAML FILE
+	-SCRIPT WHICH WOULD EXECUTE IN ARS
+
+->Ansible Inventory
+	-its a file contains of collection of IP add of ARS
+
+
+=======================================================================
+How to get started?
+step1 - Get a Vm
+step2 - install ansible
+step3 - Decide what do you want? Task to be performed in server
+step4 - Using Ansible run it.
+
+
+https://www.devopsschool.com/blog/how-to-install-ansible-in-centos-7-rhel-7/
+
+
+Ansible install commands in RHEL7/CENTOS
+----------------------------------------------
+$ sudo yum install wget -y
+$ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+$ sudo rpm -i epel-release-latest-7.noarch.rpm
+$ sudo yum update -y 
+$ sudo yum install ansible -y
+
+
+-----------------
+ansible --version
+ls /usr/bin/ansible*
+
+
+configuration file:
+---------------------
+/etc/ansible/ansible.cfg
+
+in this file we make updations to change the configuration
+
+step3 :
+what we can do now?
+
+so we manage their config?
+        Resources  I - INSTALL,U-UNINSTALL,UP-update
+----------------------------------state-----------
+	-packages 	     - I | U | UP               
+        -files               - C | E | D          
+	-directories	     - C | E | D
+	-services		enable/disable/stop/start/restart
+	-users			add /edit/delete
+	-group			add /edit/delete
+	-policy			add/edit/delete
+
+
+which one task you want to perform in server?
+one task = we have to select the module
+
+project:
+
+===========psuedocode================
+Setup a webserver
+==============================			module  parameters required
+------------------------------------------------------------------------------------
+step 1 -  Install http server                   yum     name,state=installed
+step 2 -  Copy index.html into /var/www/html	copy    destination
+step 3 -  Start a http server			service name,state=restart
+
+ansible -h for help with ansible
+
+
+Adhoc commands:
+
+1. sudo ansible localhost -m yum -a "name=httpd state=installed"
+2. sudo ansible localhost -m copy -a "src=index.html dest=/var/www/html/index.html"  -create the index.html file first
+3. sudo ansible localhost -m service -a "name=httpd state=started"
+
+
+now check:
+ps -eaf | grep httpd
+
+check with ip address in browser

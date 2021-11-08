@@ -1,0 +1,117 @@
+Tasks:
+Do one task in one remote machine
+Do one task in multiple remote machines using inventory
+Do one task in multiple remote machines using group in inventory
+
+How Authentication and Auth model in Ansible?
+==============================================
+Authentication- How to login to remote machine?
+		ssh
+		paramiko
+		docker
+		winrm
+How Authorization works in SSH?
+================================
+How to login? we can find this below options in ansible -h =help
+		username= -u 
+		password= -k
+
+		username = -u
+		key = --key-file
+
+How to gain more privalegies in remote machine?
+	sudo without password   = -b
+	sudo with password      = -b -K
+
+	sudo with diff userid&password  = -b --become-user -K
+	sudo with diff userid&key	= -b --become-user --key-file
+===============================================================================
+
+what is inventory?
+list of ip address of ARS  
+          12.4.562,
+	  12.132.63567,345.63546.35
+
+used @
+	command line          12.4.5.76,12.5246.7456,23.4667.3
+	file which is in INI format
+				12.34.6.8
+				12.45.7.2
+				13.5.89.34
+				11.4.79.23
+	script which return a list
+	Directory
+
+	list can be grouped
+	default - ALll(All ips) &ungroup(Ip add part of no group)
+
+	Group of group
+	Behaviorial param
+	variables
+
+
+for 1st command we are using inventory option -i and next list of ipaddress and module yum -m and -u for username centos --key-file for .pem file -b is sudo without password
+
+1. ansible all -i 15.207.51.13,34.65.45.1 -m yum -a "name=httpd state=installed" -u centos --key-file=node.pem -b
+
+2.  ansible all -i 15.207.51.13,34.65.45.1 -m copy -a "src=index.html dest=/var/www/html/index.html" -u centos --key-file=node.pem -b
+
+3.  ansible all -i 15.207.51.13,34.65.45.1 -m service -a "name=httpd state=started" -u centos --key-file=node.pem -b
+
+
+in executing 
+
+create the node.pem key file using vi editor
+and save it
+and using file permissions give read and write permissions to user
+chmod 600 node.pem
+
+for not prompting the yes/no for each ip address
+------------------------------------------------------
+we have to change the behaviour of ansible
+
+we have to change the ansible configuration file
+in that file remove comment
+host_key_checking =  False
+
+
+Now using inventory file
+=============================================
+
+
+create a inventory file -file name can be anything
+vi inventory
+just paste the ip address in the inventory file
+
+
+
+
+1. ansible all -i inventory -m yum -a "name=httpd state=installed" -u centos --key-file=node.pem -b
+
+2.  ansible all -i inventory -m copy -a "src=index.html dest=/var/www/html/index.html" -u centos --key-file=node.pem -b
+
+3.  ansible all -i inventory -m service -a "name=httpd state=started" -u centos --key-file=node.pem -b
+
+
+groups in inventory file
+-------------------------------
+
+[web]
+1.34.56.8
+
+[db]
+13.68.95.6
+
+[app]
+3.45.89
+32.784.9.7
+1.45.89.45
+
+1. ansible web -i inventory -m yum -a "name=httpd state=installed" -u centos --key-file=node.pem -b
+
+2.  ansible web -i inventory -m copy -a "src=index.html dest=/var/www/html/index.html" -u centos --key-file=node.pem -b
+
+3.  ansible web -i inventory -m service -a "name=httpd state=started" -u centos --key-file=node.pem -b
+
+by grouping in inventory file we can run only in that group as seen above
+

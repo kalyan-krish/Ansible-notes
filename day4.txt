@@ -1,0 +1,132 @@
+using playbook
+
+  do multiple task(playbook) in one machine(localhost)
+  do multiple task(playbook) in one remote machine
+  do multiple task(playbook) in multiple remote machines using inventory
+  do multiple task(playbook) in multiple remote machines using group in inventory file
+  do multiple task(playbook) in multiple remote machines using environment directory inventory
+
+
+for one task in multiple machines we can do easily
+but for multiple tasks to be done in multiple remote machines we need to go for playbooks to make simple
+
+using shell scripting
+-variables
+-conditioning
+-looping 
+-template config work all this not possible in shell scripting
+
+so solution is playbook
+
+--------------------------------------
+what is playbook?
+ - YAML FILE
+- it is collection of play
+
+what is play?
+play has
+------------------playbook--------------------------
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+
+all this plays is callede playbook
+
+
+https://www.devopsschool.com/blog/anatomy-of-ansible-play-defined/
+
+=============================================================================
+
+how to convert the adhoc commands to playbook?
+
+we have to learn yaml first
+
+
+-=====================================================================================================
+
+Write a playbook
+
+
+---
+- name: Update web servers
+  hosts: webservers
+
+  tasks:
+  - name: Install Apache in centos7
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+  - name: Copy index.html
+    ansible.builtin.Copy:
+      src: index.html
+      dest: /var/www/html/index.html
+  - name: Starting a Apache Server
+    ansible.builtin.Service:
+      name: httpd
+      state: started
+
+
+------------------------------------
+Basic workflow of Playbook
+
+step1 - write a yaml file
+step2 - check syntax
+step3 - Dry run
+step4 - run
+
+
+commands to run
+=====================
+ansible-playbook
+which ansible-playbook
+/usr/bin/ansible-playbook
+
+
+for help ansible-playbook -h
+
+for step2 :
+syntax check run below commands
+------------------------------------
+ansible-playbook --syntax-check web.yaml -i inventory
+
+
+for step3:
+Dry run  -k for password -b to become root
+----------------------------------------
+ansible-playbook -C web.yaml -i inventory -u azureuser -k -b
+
+
+for step4:
+Run 
+-------------------------------------
+
+ansible-playbook web.yaml -i inventory -u azureuser -k -b
+
+for local host:
+ansible-playbook localhost web.yaml
+
+

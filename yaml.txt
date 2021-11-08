@@ -1,0 +1,38 @@
+yaml begin with 
+
+can optionally begin with ---
+end with ...
+
+
+---
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+...
+
+---
+Host: all or <custom group>
+Tasks: list of module with its parameters
+          -module & param
+	   module & param
+	   module & param
+           module & param
+
+...
+
+All the members of a list are lines beginning at the same indentation level 
+starting with a "- " (a dash and a space)
+
+
+
+---
+
+fruits:
+     - Apple
+     - Orange
+     - Strawberry
+
+...

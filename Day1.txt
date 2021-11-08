@@ -1,0 +1,135 @@
+What is Ansible?
+----------------------
+	configuration mangmt tool
+
+	Tool
+	--save cost
+              for what? managing a server(s)
+	--save time
+	      for what? Deploying a App(s) on server(s)
+	-- improve quality and efficiency
+              consitent change done all server(s)
+
+	--- management
+	
+	---configuration
+	--configuration of server(s)
+
+   what is there in each server?
+		so we manage their config?
+        Resources
+---------------------------
+	-packages
+        -files
+	-directories
+	-services
+	-users
+	-group
+	-policy
+
+Finally 
+we are managing the above in multiple servers using ansible
+
+Ansible is written in python
+from redhat
+Ansible release
+	-Ansible 	-CMD - FREE -Open Source
+	-Ansible Tower	-CMD+GUI - FREE FOR 10 SERVERS -paid - enterprise
+	-Ansible AWX	-CMD+GUI - FREE FOR N SERVERS   -FREE -ENTERPRISE - NO SUPPORT -MOST RECENT VERSION
+
+=======================================================================================
+
+Ansible can manage
+	Hardware
+		Hypervisor manages hardware
+			Ansible manage hypervisor software by that it manages hardware
+
+	software
+		-files,directory,packages,services
+	people
+		-users,groups
+	process
+		-policy
+
+=========================================================
+
+WHY Ansible?
+-------------
+    Ansible is easy to 
+	Learn - Test -Debug - share - Extend
+
+
+easy to learn comparing 
+	PERL
+	PYTHON
+	BASH
+	PS
+	JAVA and any other..
+
+	Ansible is platform independent
+
+               works on all platform
+
+        Ansible is ideompotent
+	
+	what is ideompotent?
+	------------------------
+	1 Run- 10 steps all the 10 steps os run in servers              =10 mins
+	2 Run - 10 steps -0 changes then nothing runs in servers	= 0 mins
+	3 Run - 10 steps - 2 change - only that 2 steps will run in servers = 2 mins
+	it saves time so it is ideompotent
+
+
+        Ansible is consitent server change mangement
+
+	save time because it has parallel deployment
+
+	all the deployments in all the servers occurs parallely
+
+        and saves cost
+=================================================
+
+other tools -
+	CMD - ANSIBLE - PUPPET - CHEF - SALT - CFENGINE - TERRAFORM
+	GUI - UDEPLOY - OCTOPUS DEPLOY
+
+===============================================
+
+How Ansible works? Ansible Architecture?
+
+Human -> Ansible control server(ACS) - Ansible Remote server(s)(ARS)
+
+        --> Ansible + 10+tools
+	--> Ansible configuration file
+	--> Ansible playbook(Role) - YAML file -Deployment Script
+	--> Ansible Inventory - DNS/IP address of ARS
+
+Human say hey ansible read the configuration file if their is any change follow the playbook
+it will have all the logic steps and run it on Ansible inventory
+
+
+	ACS               ARS
+=====================================
+      Linux 64 Bit        Any (LINUX or Windows)
+	Linux	 	ssh ->Linux
+	-python			-python
+	linux		winrm -> windows
+				-ps3.0
+				-Dotnet 4.5x
+				-winrm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
